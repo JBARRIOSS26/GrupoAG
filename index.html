@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo AG de Occidente — Ingeniería &amp; Servicios Industriales</title>
+  <meta name="description" content="Grupo AG de Occidente S.A. de C.V. — Empresa mexicana especializada en automatización, mantenimiento eléctrico, HVAC y maniobras industriales desde 2002. Guadalajara y Parral." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  { DEFAULT: '#0F1E36', dark: '#0A1424', light: '#1A2F50' },
+            cyan:  { DEFAULT: '#00A3FF', dark: '#0082CC', light: '#33B8FF' },
+            ink:   { DEFAULT: '#1E293B', muted: '#64748B', subtle: '#475569' },
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --surface: #F4F6F9;
+      --card: #FFFFFF;
+      --navy: #0F1E36;
+      --cyan: #00A3FF;
+      --cyan-dark: #0082CC;
+      --ink: #1E293B;
+      --ink-muted: #64748B;
+      --ink-subtle: #475569;
+      --footer-bg: #0A1424;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--surface); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    /* Card */
+    .card { background: var(--card); border-radius: 12px; border: 1px solid #E2E8F0; box-shadow: 0 1px 3px rgba(15,30,54,.08), 0 4px 16px rgba(15,30,54,.04); transition: box-shadow .3s, transform .3s; }
+    .card:hover { box-shadow: 0 4px 20px rgba(15,30,54,.14), 0 1px 4px rgba(15,30,54,.08); transform: translateY(-2px); }
+
+    /* Badge pill */
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; }
+
+    /* Nav link */
+    .nav-link { padding: 7px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--ink-muted); transition: color .2s, background .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--navy); background: var(--surface); font-weight: 600; }
+
+    /* Specialty card image zoom */
+    .spec-card .spec-img { transition: transform .7s ease; }
+    .spec-card:hover .spec-img { transform: scale(1.06); }
+
+    /* KPI card */
+    .kpi-card { transition: background .3s; }
+    .kpi-card:hover { background: rgba(255,255,255,.05); }
+    .kpi-num { font-size: 2.5rem; font-weight: 900; color: var(--cyan); line-height: 1; display: block; transition: transform .3s; }
+    .kpi-card:hover .kpi-num { transform: scale(1.1); }
+
+    /* Section badge */
+    .sec-badge { background: rgba(0,163,255,.1); border: 1px solid rgba(0,163,255,.2); color: var(--cyan-dark); }
+    .sec-badge-navy { background: rgba(15,30,54,.08); border: 1px solid rgba(15,30,54,.14); color: var(--navy); }
+
+    /* Scroll fade-in */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* Footer link */
+    .footer-link { display: inline-flex; align-items: center; gap: 6px; color: #94A3B8; font-size: 14px; transition: color .2s, transform .2s; }
+    .footer-link:hover { color: #FFFFFF; transform: translateX(3px); }
+
+    /* Form inputs */
+    .form-input { width: 100%; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--ink); background: #fff; transition: border-color .2s, box-shadow .2s; outline: none; }
+    .form-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,163,255,.15); }
+    .form-input::placeholder { color: var(--ink-muted); }
+
+    /* Divider dot */
+    .dot-sep { display: inline-block; width: 3px; height: 3px; border-radius: 50%; background: currentColor; vertical-align: middle; opacity: .5; }
+
+    /* Grid overlay pattern */
+    .grid-overlay { background-image: repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 60px), repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 60px); }
+
+    /* Pulse dot */
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.4)} }
+    .pulse-dot { animation: pulse 2s ease-in-out infinite; }
+
+    /* Spin */
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .spin { animation: spin .8s linear infinite; }
+
+    /* ── Spec Carousel ── */
+    .spec-carousel-track { display:flex; height:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); will-change:transform; }
+    .spec-carousel-track img { flex-shrink:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+    .sdots { position:absolute; bottom:20px; right:14px; display:flex; flex-direction:column; gap:6px; z-index:10; }
+    .sdot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.35); cursor:pointer; transition:background .3s, transform .3s; border:none; padding:0; outline:none; }
+    .sdot.active { background:var(--cyan); transform:scale(1.4); }
+    .sc-btn { position:absolute; top:50%; transform:translateY(-50%); width:30px; height:30px; background:rgba(15,30,54,.45); backdrop-filter:blur(4px); border:1px solid rgba(255,255,255,.25); border-radius:50%; color:#fff; font-size:20px; font-weight:300; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .25s, background .2s; z-index:10; padding:0; }
+    .spec-card:hover .sc-btn { opacity:1; }
+    .sc-btn:hover { background:rgba(0,163,255,.55); }
+    .sc-prev { left:10px; }
+    .sc-next { right:10px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOP BAR
+═══════════════════════════════════════════════════════════ -->
+<div class="hidden md:block" style="background:var(--navy); border-bottom:1px solid #1A2F50;">
+  <div style="max-width:1280px; margin:0 auto; padding:8px 24px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:16px; color:#94A3B8; font-size:12px;">
+      <span style="display:flex; align-items:center; gap:6px;">
+        <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Sedes: <strong style="color:#fff;">Guadalajara, Jal.</strong> &nbsp;|&nbsp; <strong style="color:#fff;">Parral, Chih.</strong>
+      </span>
+      <span style="width:1px;height:12px;background:#1A2F50;display:inline-block;"></span>
+      <a href="mailto:grupoagdeoccidente@hotmail.com" style="color:#94A3B8;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#94A3B8'">grupoagdeoccidente@hotmail.com</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px; color:#94A3B8; font-size:12px;">
+      <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      Guardia &amp; Atención:&nbsp;
+      <a href="tel:+523331590571" style="color:#fff;font-weight:600;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#fff'">33 3159 0571</a>
+      &nbsp;/&nbsp;
+      <a href="tel:+523331621424" style="color:#fff;font-weight:600;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#fff'">33 3162 1424</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════ -->
+<header id="navbar" style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #E2E8F0;transition:box-shadow .3s;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+    <nav style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+
+      <!-- Logo -->
+      <a href="#inicio" style="display:flex;align-items:center;gap:10px;text-decoration:none;" id="logo-link">
+        <img src="Logo.jpeg" alt="Grupo AG de Occidente" id="logo-icon"
+          style="height:52px;width:auto;border-radius:8px;object-fit:contain;transition:opacity .3s;"
+          onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'" />
+        <div>
+          <div style="font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.01em;line-height:1.1;">GRUPO AG DE OCCIDENTE</div>
+          <div style="font-size:10px;font-weight:500;color:var(--ink-muted);letter-spacing:.12em;text-transform:uppercase;line-height:1.2;margin-top:2px;">Technology Trends · Ingeniería Industrial</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul id="desktop-nav" style="display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;" class="hidden lg:flex">
+        <li><a href="#inicio"         class="nav-link">Inicio</a></li>
+        <li><a href="#nosotros"       class="nav-link">Nosotros</a></li>
+        <li><a href="#especialidades" class="nav-link">Especialidades</a></li>
+        <li><a href="#clientes"       class="nav-link">Clientes</a></li>
+        <li><a href="#directorio"     class="nav-link">Directorio</a></li>
+        <li><a href="#ubicaciones"    class="nav-link">Ubicaciones</a></li>
+      </ul>
+
+      <!-- CTA + Burger -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="https://wa.me/523331590571?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Grupo%20AG%20de%20Occidente.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20industrial." id="cta-nav" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex" style="align-items:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;transition:background .3s,box-shadow .3s;" onmouseover="this.style.background='#128C7E';this.style.boxShadow='0 4px 16px rgba(37,211,102,.35)'" onmouseout="this.style.background='#25D366';this.style.boxShadow='none'">
+          <!-- WhatsApp icon -->
+          <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.341.637 4.637 1.844 6.651L2.667 29.333l6.869-1.797A13.287 13.287 0 0016.003 29.333C23.363 29.333 29.333 23.363 29.333 16S23.363 2.667 16.003 2.667zm0 24.266a11.017 11.017 0 01-5.617-1.541l-.401-.239-4.076 1.068 1.088-3.967-.261-.407A10.999 10.999 0 015.001 16c0-6.065 4.937-11 11.002-11 6.063 0 10.997 4.935 10.997 11 0 6.063-4.934 10.933-10.997 10.933zm6.032-8.229c-.329-.165-1.948-.961-2.251-1.071-.303-.109-.523-.165-.743.165-.22.329-.853 1.071-1.046 1.291-.192.22-.385.247-.714.082-.329-.165-1.391-.513-2.649-1.636-.979-.875-1.639-1.955-1.831-2.284-.192-.329-.021-.507.145-.671.149-.148.329-.385.494-.578.164-.193.219-.33.329-.549.109-.22.055-.412-.027-.578-.083-.165-.744-1.791-1.019-2.452-.269-.645-.541-.557-.744-.567l-.633-.011c-.22 0-.577.082-.879.412-.303.329-1.155 1.127-1.155 2.749s1.183 3.189 1.347 3.409c.165.22 2.329 3.557 5.644 4.991.789.341 1.404.544 1.884.697.791.252 1.511.216 2.079.131.634-.094 1.948-.796 2.224-1.565.274-.769.274-1.428.192-1.565-.082-.137-.302-.22-.631-.385z"/></svg>
+          WhatsApp
+        </a>
+        <button id="menu-toggle" aria-label="Menú" style="display:none;padding:8px;border:none;background:transparent;cursor:pointer;border-radius:6px;" class="lg:hidden">
+          <svg style="width:22px;height:22px;color:var(--navy)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" style="display:none;border-top:1px solid #F1F5F9;padding:12px 0 16px;">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;">
+        <li><a href="#inicio"         class="nav-link" style="display:block;">Inicio</a></li>
+        <li><a href="#nosotros"       class="nav-link" style="display:block;">Nosotros</a></li>
+        <li><a href="#especialidades" class="nav-link" style="display:block;">Especialidades</a></li>
+        <li><a href="#clientes"       class="nav-link" style="display:block;">Clientes</a></li>
+        <li><a href="#directorio"     class="nav-link" style="display:block;">Directorio</a></li>
+        <li><a href="#ubicaciones"    class="nav-link" style="display:block;">Ubicaciones</a></li>
+        <li style="margin-top:8px;">
+          <a href="https://wa.me/523331590571?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Grupo%20AG%20de%20Occidente.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20industrial." target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:8px;text-decoration:none;">
+            <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.341.637 4.637 1.844 6.651L2.667 29.333l6.869-1.797A13.287 13.287 0 0016.003 29.333C23.363 29.333 29.333 23.363 29.333 16S23.363 2.667 16.003 2.667zm0 24.266a11.017 11.017 0 01-5.617-1.541l-.401-.239-4.076 1.068 1.088-3.967-.261-.407A10.999 10.999 0 015.001 16c0-6.065 4.937-11 11.002-11 6.063 0 10.997 4.935 10.997 11 0 6.063-4.934 10.933-10.997 10.933zm6.032-8.229c-.329-.165-1.948-.961-2.251-1.071-.303-.109-.523-.165-.743.165-.22.329-.853 1.071-1.046 1.291-.192.22-.385.247-.714.082-.329-.165-1.391-.513-2.649-1.636-.979-.875-1.639-1.955-1.831-2.284-.192-.329-.021-.507.145-.671.149-.148.329-.385.494-.578.164-.193.219-.33.329-.549.109-.22.055-.412-.027-.578-.083-.165-.744-1.791-1.019-2.452-.269-.645-.541-.557-.744-.567l-.633-.011c-.22 0-.577.082-.879.412-.303.329-1.155 1.127-1.155 2.749s1.183 3.189 1.347 3.409c.165.22 2.329 3.557 5.644 4.991.789.341 1.404.544 1.884.697.791.252 1.511.216 2.079.131.634-.094 1.948-.796 2.224-1.565.274-.769.274-1.428.192-1.565-.082-.137-.302-.22-.631-.385z"/></svg>
+            WhatsApp
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════
+     S1 · INICIO — HERO
+═══════════════════════════════════════════════════════════ -->
+<section id="inicio" aria-labelledby="hero-h1">
+
+  <!-- Hero -->
+  <div style="position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;">
+    <div style="position:absolute;inset:0;">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1920&q=80" alt="Planta industrial de ingeniería" style="width:100%;height:100%;object-fit:cover;object-position:center;" loading="eager" />
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,30,54,.93) 0%,rgba(15,30,54,.82) 60%,rgba(26,47,80,.75) 100%);"></div>
+      <div class="grid-overlay" style="position:absolute;inset:0;opacity:.04;"></div>
+    </div>
+
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 24px;width:100%;">
+      <div style="max-width:720px;">
+
+        <!-- Badge -->
+        <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px 18px;border-radius:999px;margin-bottom:28px;backdrop-filter:blur(6px);">
+          <span class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block;flex-shrink:0;"></span>
+          Cobertura Estratégica: Guadalajara, Jal. &amp; Parral, Chih. &nbsp;·&nbsp; Desde 2002
+        </div>
+
+        <!-- H1 -->
+        <h1 id="hero-h1" style="font-size:clamp(2.2rem,5vw,3.75rem);font-weight:900;color:#fff;line-height:1.06;letter-spacing:-.02em;margin:0 0 20px;">
+          Ingeniería, <span style="color:var(--cyan);">Automatización</span><br/>y Mantenimiento Industrial
+        </h1>
+
+        <!-- Subtitle -->
+        <p style="font-size:1.1rem;color:#CBD5E1;line-height:1.75;max-width:600px;margin:0 0 36px;font-weight:300;">
+          Trayectoria y soluciones especializadas para la industria mexicana desde 2002. Garantizamos continuidad operativa, estándares críticos de seguridad y tecnología de control avanzada.
+        </p>
+
+        <!-- CTAs -->
+        <div style="display:flex;flex-wrap:wrap;gap:14px;">
+          <a href="#especialidades" style="display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:12px;text-decoration:none;transition:background .3s,box-shadow .3s,transform .2s;box-shadow:0 8px 24px rgba(0,163,255,.3);" onmouseover="this.style.background='var(--cyan-dark)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--cyan)';this.style.transform='translateY(0)'">
+            Ver Catálogo de Especialidades
+            <svg style="width:18px;height:18px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </a>
+          <a href="#directorio" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:600;font-size:15px;padding:14px 28px;border-radius:12px;text-decoration:none;transition:background .3s;backdrop-filter:blur(4px);" onmouseover="this.style.background='rgba(255,255,255,.18)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+            <svg style="width:18px;height:18px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            Contactar a Ingeniería
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.5;">
+      <span style="color:#fff;font-size:10px;letter-spacing:.12em;text-transform:uppercase;">Explorar</span>
+      <div style="width:1px;height:32px;background:linear-gradient(to bottom,#fff,transparent);"></div>
+    </div>
+  </div>
+
+  <!-- KPI Strip -->
+  <div style="background:var(--navy);border-top:1px solid #1A2F50;">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+        <div class="kpi-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:36px 16px;text-align:center;border-right:1px solid #1A2F50;">
+          <span class="kpi-num">+22</span>
+          <span style="color:#fff;font-weight:600;font-size:14px;">Años</span>
+          <span style="color:#64748B;font-size:11px;letter-spacing:.08em;text-transform:uppercase;">De experiencia continua</span>
+        </div>
+        <div class="kpi-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:36px 16px;text-align:center;border-right:1px solid #1A2F50;">
+          <span class="kpi-num">4</span>
+          <span style="color:#fff;font-weight:600;font-size:14px;">Divisiones</span>
+          <span style="color:#64748B;font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Especialidades técnicas</span>
+        </div>
+        <div class="kpi-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:36px 16px;text-align:center;border-right:1px solid #1A2F50;">
+          <span class="kpi-num" style="font-size:2rem;">MX</span>
+          <span style="color:#fff;font-weight:600;font-size:14px;">Nacional</span>
+          <span style="color:#64748B;font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Cobertura de planta</span>
+        </div>
+        <div class="kpi-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:36px 16px;text-align:center;">
+          <span class="kpi-num" style="font-size:1.4rem;line-height:1.2;">STPS<br/>&amp; NOM</span>
+          <span style="color:#fff;font-weight:600;font-size:14px;margin-top:4px;">Normativo</span>
+          <span style="color:#64748B;font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Cumplimiento estricto</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     S2 · NOSOTROS
+═══════════════════════════════════════════════════════════ -->
+<section id="nosotros" style="padding:96px 0;background:var(--surface);" aria-labelledby="nosotros-h2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+
+    <!-- Header -->
+    <div style="margin-bottom:56px;">
+      <span class="badge sec-badge" style="margin-bottom:14px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+        Carta de Presentación Corporativa
+      </span>
+      <h2 id="nosotros-h2" style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:var(--navy);line-height:1.15;max-width:620px;margin:0;">
+        Compromiso técnico y rigor operativo al servicio de la industria
+      </h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="lg:grid-cols-2">
+
+      <!-- Left -->
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <p style="font-size:1.05rem;color:var(--ink-subtle);line-height:1.8;">
+          Fundada en Guadalajara, Jalisco, el 12 de marzo de 2002, <strong style="color:var(--navy);">Grupo AG de Occidente S.A. de C.V.</strong> es una firma de ingeniería industrial especializada en el montaje, suministro y mantenimiento de equipos industriales de alta complejidad, con operaciones extendidas a nivel nacional.
+        </p>
+        <p style="color:var(--ink-subtle);line-height:1.8;">
+          Nuestra trayectoria abarca proyectos críticos en alta tensión y media tensión, automatización de procesos con PLC y HMI de última generación, maniobras de alto tonelaje y la ejecución de obras civiles e hidráulicas de gran envergadura. Cada proyecto se gestiona bajo protocolos rigurosos de seguridad STPS y cumplimiento NOM.
+        </p>
+
+        <!-- Misión -->
+        <div class="card fade-in" style="padding:24px;">
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:40px;height:40px;background:rgba(15,30,54,.07);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg style="width:20px;height:20px;color:var(--navy)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Misión Institucional</div>
+              <p style="font-size:14px;color:var(--ink-subtle);line-height:1.7;margin:0;">Generar soluciones para nuestros clientes en el montaje, suministro y mantenimiento de sus equipos, ofreciendo asistencia técnica profesional de acuerdo a las necesidades de tiempos, espacio y presupuesto.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visión -->
+        <div class="card fade-in" style="padding:24px;">
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:40px;height:40px;background:rgba(0,163,255,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg style="width:20px;height:20px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Visión Estratégica</div>
+              <p style="font-size:14px;color:var(--ink-subtle);line-height:1.7;margin:0;">Consolidarnos como empresa líder en la industria, ofreciendo servicios especializados y de calidad, utilizando la más alta tecnología para eficientar procesos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Valores 2x2 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+        <!-- 01 Seguridad -->
+        <div class="card fade-in" style="padding:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <span style="font-size:10px;font-weight:700;color:rgba(15,30,54,.3);letter-spacing:.1em;">01</span>
+            <div style="width:32px;height:32px;background:#FEF2F2;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg style="width:16px;height:16px;color:#EF4444" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+          </div>
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 8px;font-size:15px;">Seguridad</h3>
+          <p style="font-size:12px;color:var(--ink-subtle);line-height:1.7;margin:0 0 14px;">Prioridad absoluta en maniobras y trabajos en alta tensión bajo protocolos OSHA y NOM-STPS.</p>
+          <span style="display:inline-flex;align-items:center;gap:6px;background:#FEF2F2;color:#DC2626;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#EF4444;display:inline-block;"></span>
+            0 Incidentes Críticos
+          </span>
+        </div>
+
+        <!-- 02 Calidad -->
+        <div class="card fade-in" style="padding:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <span style="font-size:10px;font-weight:700;color:rgba(15,30,54,.3);letter-spacing:.1em;">02</span>
+            <div style="width:32px;height:32px;background:#ECFDF5;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg style="width:16px;height:16px;color:#10B981" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            </div>
+          </div>
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 8px;font-size:15px;">Calidad</h3>
+          <p style="font-size:12px;color:var(--ink-subtle);line-height:1.7;margin:0 0 14px;">Protocolos rigurosos de calibración, pruebas dieléctricas y refacciones industriales certificadas.</p>
+          <span style="display:inline-flex;align-items:center;gap:6px;background:#ECFDF5;color:#047857;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#10B981;display:inline-block;"></span>
+            Ingeniería Validada
+          </span>
+        </div>
+
+        <!-- 03 Innovación -->
+        <div class="card fade-in" style="padding:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <span style="font-size:10px;font-weight:700;color:rgba(15,30,54,.3);letter-spacing:.1em;">03</span>
+            <div style="width:32px;height:32px;background:#EFF6FF;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg style="width:16px;height:16px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+          </div>
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 8px;font-size:15px;">Innovación</h3>
+          <p style="font-size:12px;color:var(--ink-subtle);line-height:1.7;margin:0 0 14px;">Arquitecturas modernas de automatización digital, telemetría remota y SCADA.</p>
+          <span style="display:inline-flex;align-items:center;gap:6px;background:#EFF6FF;color:var(--cyan-dark);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">
+            <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+            Industria 4.0 Ready
+          </span>
+        </div>
+
+        <!-- 04 Adaptabilidad -->
+        <div class="card fade-in" style="padding:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <span style="font-size:10px;font-weight:700;color:rgba(15,30,54,.3);letter-spacing:.1em;">04</span>
+            <div style="width:32px;height:32px;background:#FFFBEB;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <svg style="width:16px;height:16px;color:#F59E0B" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 8px;font-size:15px;">Adaptabilidad</h3>
+          <p style="font-size:12px;color:var(--ink-subtle);line-height:1.7;margin:0 0 14px;">Flexibilidad operativa en paros programados de fin de semana y guardias técnicas 24/7.</p>
+          <span style="display:inline-flex;align-items:center;gap:6px;background:#FFFBEB;color:#B45309;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#F59E0B;display:inline-block;"></span>
+            Flexibilidad en Planta
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     S3 · ESPECIALIDADES
+═══════════════════════════════════════════════════════════ -->
+<section id="especialidades" style="padding:96px 0;background:#fff;" aria-labelledby="esp-h2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+
+    <!-- Header -->
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:56px;">
+      <div>
+        <span class="badge sec-badge-navy" style="margin-bottom:14px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
+          División de Capacidades
+        </span>
+        <h2 id="esp-h2" style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:var(--navy);line-height:1.15;margin:0 0 8px;">
+          Áreas de Especialidad<br/>y Trabajos Realizados
+        </h2>
+        <p style="color:var(--ink-subtle);margin:0;max-width:460px;">Catálogo visual de alcances técnicos y certificaciones por división operativa.</p>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,163,255,.1);border:1px solid rgba(0,163,255,.25);color:var(--cyan-dark);font-weight:700;font-size:14px;padding:10px 20px;border-radius:12px;white-space:nowrap;flex-shrink:0;">
+        <span class="pulse-dot" style="width:10px;height:10px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+        4 Áreas Operativas Activas
+      </div>
+    </div>
+
+    <!-- 2x2 Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <!-- Card 1: Eléctrico -->
+      <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
+        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+          <div class="spec-carousel-track">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Tablero de control eléctrico" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="Técnico en subestación eléctrica" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" alt="Infraestructura de alta tensión" loading="lazy"/>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
+          <div style="position:absolute;top:16px;left:16px;z-index:6;">
+            <span style="background:var(--navy);color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid rgba(0,163,255,.3);">Alta &amp; Media Tensión</span>
+          </div>
+          <div style="position:absolute;bottom:16px;left:16px;display:flex;flex-wrap:wrap;gap:8px;z-index:6;">
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Termografía Infrarroja</span>
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Calibración Switches</span>
+          </div>
+          <div class="sdots">
+            <button class="sdot active" aria-label="Imagen 1"></button>
+            <button class="sdot" aria-label="Imagen 2"></button>
+            <button class="sdot" aria-label="Imagen 3"></button>
+          </div>
+          <button class="sc-btn sc-prev" aria-label="Anterior">&#8249;</button>
+          <button class="sc-btn sc-next" aria-label="Siguiente">&#8250;</button>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 14px;">Mantenimiento Eléctrico y Potencia</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Pruebas de relación TTR y aislamiento Megger Dieléctrico
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Análisis químico de aceite de transformadores
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Pólizas de soporte y monitoreo 24/7 los 365 días del año
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Card 2: HVAC -->
+      <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
+        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+          <div class="spec-carousel-track">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Sistema HVAC industrial" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=800&q=80" alt="Sistema de climatización industrial" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80" alt="Unidades de aire acondicionado industrial" loading="lazy"/>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
+          <div style="position:absolute;top:16px;left:16px;z-index:6;">
+            <span style="background:var(--navy);color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid rgba(0,163,255,.3);">Sistemas Críticos</span>
+          </div>
+          <div style="position:absolute;bottom:16px;left:16px;display:flex;flex-wrap:wrap;gap:8px;z-index:6;">
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Ductería Hermética</span>
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Unidades UMA</span>
+          </div>
+          <div class="sdots">
+            <button class="sdot active" aria-label="Imagen 1"></button>
+            <button class="sdot" aria-label="Imagen 2"></button>
+            <button class="sdot" aria-label="Imagen 3"></button>
+          </div>
+          <button class="sc-btn sc-prev" aria-label="Anterior">&#8249;</button>
+          <button class="sc-btn sc-next" aria-label="Siguiente">&#8250;</button>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 14px;">Equipos HVAC y Climatización</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Filtración Grado HEPA y control psicrométrico T/H
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Detección de gas ecológico y ambientes críticos
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Cuartos limpios, laboratorios y sites de telecomunicaciones
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Card 3: Automatización -->
+      <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
+        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+          <div class="spec-carousel-track">
+            <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=800&q=80" alt="Línea de manufactura automatizada" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robots industriales PLC" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Tablero de control SCADA" loading="lazy"/>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
+          <div style="position:absolute;top:16px;left:16px;z-index:6;">
+            <span style="background:var(--navy);color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid rgba(0,163,255,.3);">Industria 4.0 &amp; Control</span>
+          </div>
+          <div style="position:absolute;bottom:16px;left:16px;display:flex;flex-wrap:wrap;gap:8px;z-index:6;">
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Pantallas SCADA</span>
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Cableado Normado</span>
+          </div>
+          <div class="sdots">
+            <button class="sdot active" aria-label="Imagen 1"></button>
+            <button class="sdot" aria-label="Imagen 2"></button>
+            <button class="sdot" aria-label="Imagen 3"></button>
+          </div>
+          <button class="sc-btn sc-prev" aria-label="Anterior">&#8249;</button>
+          <button class="sc-btn sc-next" aria-label="Siguiente">&#8250;</button>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 14px;">Automatización de Procesos</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Redes Profinet / Modbus y variadores de frecuencia VFD
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Lazos cerrados PID e islas de E/S
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              PLC Siemens &amp; Delta · HMI · Telemetría Remota
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Card 4: Maniobras -->
+      <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
+        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+          <div class="spec-carousel-track">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=800&q=80" alt="Construcción industrial pesada" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Maniobra con maquinaria pesada" loading="lazy"/>
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Montaje de estructura industrial" loading="lazy"/>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
+          <div style="position:absolute;top:16px;left:16px;z-index:6;">
+            <span style="background:var(--navy);color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid rgba(0,163,255,.3);">Alto Tonelaje</span>
+          </div>
+          <div style="position:absolute;bottom:16px;left:16px;display:flex;flex-wrap:wrap;gap:8px;z-index:6;">
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Izaje Grúa Pórtico</span>
+            <span style="background:rgba(255,255,255,.15);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:999px;">Elevador de Carga</span>
+          </div>
+          <div class="sdots">
+            <button class="sdot active" aria-label="Imagen 1"></button>
+            <button class="sdot" aria-label="Imagen 2"></button>
+            <button class="sdot" aria-label="Imagen 3"></button>
+          </div>
+          <button class="sc-btn sc-prev" aria-label="Anterior">&#8249;</button>
+          <button class="sc-btn sc-next" aria-label="Siguiente">&#8250;</button>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:18px;font-weight:700;color:var(--navy);margin:0 0 14px;">Maniobras y Montajes Industriales</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Rigging y cálculo de cargas estructurales
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Pailería estructural certificada y soldadura calificada AWS
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-subtle);">
+              <svg style="width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:1px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+              Fabricación e instalación de montacargas y elevadores
+            </li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     S4 · CLIENTES
+═══════════════════════════════════════════════════════════ -->
+<section id="clientes" style="padding:96px 0;background:var(--surface);" aria-labelledby="cli-h2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="badge sec-badge" style="margin-bottom:14px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+        Directorio Institucional
+      </span>
+      <h2 id="cli-h2" style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:var(--navy);line-height:1.15;margin:0;">
+        Empresas que confían en nosotros
+      </h2>
+    </div>
+
+    <!-- Client cards -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:32px;">
+
+      <div class="card fade-in" style="padding:20px;text-align:center;">
+        <div style="width:48px;height:48px;background:#EFF6FF;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+          <svg style="width:24px;height:24px;color:#3B82F6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 style="font-weight:700;color:var(--navy);font-size:13px;margin:0 0 4px;">Keysight Technologies</h3>
+        <p style="font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">Tecnología y Telecomunicaciones</p>
+        <span style="display:inline-block;background:#EFF6FF;color:#1D4ED8;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;">Validación Continua</span>
+      </div>
+
+      <div class="card fade-in" style="padding:20px;text-align:center;">
+        <div style="width:48px;height:48px;background:#FEFCE8;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+          <svg style="width:24px;height:24px;color:#EAB308" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3 style="font-weight:700;color:var(--navy);font-size:13px;margin:0 0 4px;">Eléctrica AB</h3>
+        <p style="font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">Distribución Eléctrica</p>
+        <span style="display:inline-block;background:#FEFCE8;color:#92400E;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;">Red Media/Alta Tensión</span>
+      </div>
+
+      <div class="card fade-in" style="padding:20px;text-align:center;">
+        <div style="width:48px;height:48px;background:#F8FAFC;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;border:1px solid #E2E8F0;">
+          <svg style="width:24px;height:24px;color:#64748B" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <h3 style="font-weight:700;color:var(--navy);font-size:13px;margin:0 0 4px;">Grupo Napresa</h3>
+        <p style="font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">Materiales y Concretos</p>
+        <span style="display:inline-block;background:#F1F5F9;color:#475569;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;">Plantas de Producción</span>
+      </div>
+
+      <div class="card fade-in" style="padding:20px;text-align:center;">
+        <div style="width:48px;height:48px;background:#F0FDFA;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+          <svg style="width:24px;height:24px;color:#0D9488" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+        </div>
+        <h3 style="font-weight:700;color:var(--navy);font-size:13px;margin:0 0 4px;">Granja Acuícola del Valle</h3>
+        <p style="font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">Agroindustria e Hidráulica</p>
+        <span style="display:inline-block;background:#F0FDFA;color:#0F766E;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;">Sistemas de Bombeo</span>
+      </div>
+
+      <div class="card fade-in" style="padding:20px;text-align:center;">
+        <div style="width:48px;height:48px;background:#FFF7ED;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+          <svg style="width:24px;height:24px;color:#EA580C" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <h3 style="font-weight:700;color:var(--navy);font-size:13px;margin:0 0 4px;">Materiales Arredondo</h3>
+        <p style="font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;">Infraestructura y Suministros</p>
+        <span style="display:inline-block;background:#FFF7ED;color:#9A3412;font-size:9px;font-weight:700;padding:3px 8px;border-radius:999px;">Automatización Logística</span>
+      </div>
+
+    </div>
+
+    <!-- Banner -->
+    <div style="background:var(--navy);border-radius:16px;padding:28px 36px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;">
+      <div>
+        <h3 style="font-weight:700;color:#fff;font-size:18px;margin:0 0 4px;">Relaciones Industriales de Largo Plazo</h3>
+        <p style="color:#94A3B8;font-size:14px;margin:0;">Pólizas anuales de soporte preventivo programado y atención reactiva prioritaria.</p>
+      </div>
+      <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,163,255,.15);border:1px solid rgba(0,163,255,.35);color:var(--cyan);font-weight:700;font-size:14px;padding:10px 20px;border-radius:12px;white-space:nowrap;flex-shrink:0;">
+        <span class="pulse-dot" style="width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block;"></span>
+        Disponibilidad Nacional
+      </span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     S5 · DIRECTORIO & FORMULARIO
+═══════════════════════════════════════════════════════════ -->
+<section id="directorio" style="padding:96px 0;background:#fff;" aria-labelledby="dir-h2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+
+    <div style="margin-bottom:48px;">
+      <span class="badge sec-badge-navy" style="margin-bottom:14px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
+        Directorio Corporativo
+      </span>
+      <h2 id="dir-h2" style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:var(--navy);line-height:1.15;margin:0;">
+        Contáctenos
+      </h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+
+      <!-- Left: Sedes -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <!-- Matriz -->
+        <div style="background:var(--navy);border-radius:16px;padding:24px;">
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:40px;height:40px;background:rgba(0,163,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg style="width:20px;height:20px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Matriz Corporativa</div>
+              <h3 style="font-weight:700;color:#fff;font-size:15px;margin:0 0 8px;">Guadalajara — Oficina Fiscal y Operaciones</h3>
+              <p style="color:#94A3B8;font-size:14px;line-height:1.7;margin:0;">Jardines Japoneses #3538, Col. Lagos de Oriente<br/>Guadalajara, Jalisco · C.P. 44770</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fresno -->
+        <div class="card" style="padding:22px;">
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:40px;height:40px;background:rgba(15,30,54,.07);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg style="width:20px;height:20px;color:var(--navy)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Sucursal El Fresno</div>
+              <h3 style="font-weight:700;color:var(--navy);font-size:15px;margin:0 0 6px;">Zona Industrial El Fresno, Guadalajara</h3>
+              <p style="color:var(--ink-subtle);font-size:14px;line-height:1.7;margin:0;">Calle Eucalipto #1926, Col. del Fresno<br/>Guadalajara, Jalisco · C.P. 44900</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parral -->
+        <div class="card" style="padding:22px;">
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="width:40px;height:40px;background:rgba(15,30,54,.07);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg style="width:20px;height:20px;color:var(--navy)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Sucursal Parral — División Norte</div>
+              <h3 style="font-weight:700;color:var(--navy);font-size:15px;margin:0 0 6px;">Hidalgo del Parral, Chihuahua</h3>
+              <p style="color:var(--ink-subtle);font-size:14px;line-height:1.7;margin:0;">Calle Universidad #45, Col. Rubén Aguilar<br/>Hidalgo del Parral, Chihuahua · C.P. 33826</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phones -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <a href="tel:+523331590571" class="card" style="padding:16px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='#E2E8F0'">
+            <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Línea 1</div>
+            <div style="font-weight:700;color:var(--navy);font-size:15px;">33 3159 0571</div>
+          </a>
+          <a href="tel:+523331621424" class="card" style="padding:16px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='#E2E8F0'">
+            <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Línea 2</div>
+            <div style="font-weight:700;color:var(--navy);font-size:15px;">33 3162 1424</div>
+          </a>
+        </div>
+
+        <!-- Horario -->
+        <div class="card" style="padding:16px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <svg style="width:20px;height:20px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div>
+              <div style="font-weight:600;color:var(--navy);font-size:14px;">Horario de Atención</div>
+              <div style="color:var(--ink-subtle);font-size:12px;margin-top:2px;">Lun–Vie 8:00–18:00 hrs · Soporte a paros críticos <strong style="color:var(--navy);">24/7</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="card" style="padding:36px;">
+        <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin:0 0 6px;">Enviar Consulta Informativa</h3>
+        <p style="color:var(--ink-subtle);font-size:14px;margin:0 0 24px;">Complete el formulario y un especialista le responderá a la brevedad.</p>
+
+        <form id="contact-form" style="display:flex;flex-direction:column;gap:16px;" novalidate>
+          <div>
+            <label for="f-nombre" style="display:block;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Nombre Completo / Razón Social</label>
+            <input type="text" id="f-nombre" name="nombre" placeholder="Empresa S.A. de C.V. o Nombre del Contacto" class="form-input" required />
+          </div>
+          <div>
+            <label for="f-email" style="display:block;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Correo Electrónico Corporativo</label>
+            <input type="email" id="f-email" name="email" placeholder="contacto@empresa.com.mx" class="form-input" required />
+          </div>
+          <div>
+            <label for="f-tel" style="display:block;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Teléfono Directo de Planta o Celular</label>
+            <input type="tel" id="f-tel" name="telefono" placeholder="+52 (33) 0000 0000" class="form-input" />
+          </div>
+          <div>
+            <label for="f-consulta" style="display:block;font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">Descripción de la Consulta o Requerimiento</label>
+            <textarea id="f-consulta" name="consulta" rows="4" placeholder="Describa el requerimiento técnico, tipo de equipo, planta o proyecto..." class="form-input" style="resize:none;" required></textarea>
+          </div>
+
+          <button id="submit-btn" type="submit" style="width:100%;background:var(--navy);color:#fff;font-weight:700;font-size:15px;padding:14px 24px;border-radius:10px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .3s,transform .2s,box-shadow .3s;" onmouseover="this.style.background='var(--cyan)';this.style.transform='translateY(-1px)';" onmouseout="this.style.background='var(--navy)';this.style.transform='translateY(0)';">
+            <svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            Enviar Consulta Informativa
+          </button>
+
+          <p style="font-size:11px;color:var(--ink-muted);text-align:center;line-height:1.6;margin:0;">
+            🔒 Tratamiento bajo estricta confidencialidad corporativa e industrial.<br/>Sus datos no serán compartidos con terceros.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     S6 · UBICACIONES
+═══════════════════════════════════════════════════════════ -->
+<section id="ubicaciones" style="padding:96px 0;background:var(--surface);" aria-labelledby="ub-h2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="badge sec-badge-navy" style="margin-bottom:14px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
+        Cobertura Operativa
+      </span>
+      <h2 id="ub-h2" style="font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:var(--navy);margin:0 0 8px;">Nuestras Ubicaciones</h2>
+      <p style="color:var(--ink-subtle);margin:0;">Presencia en el Área Metropolitana de Guadalajara y el Norte del País</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <div class="card fade-in" style="overflow:hidden;">
+        <div style="height:160px;background:linear-gradient(135deg,var(--navy) 0%,#1A2F50 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div class="grid-overlay" style="position:absolute;inset:0;opacity:.1;"></div>
+          <div style="text-align:center;position:relative;">
+            <div style="width:48px;height:48px;background:rgba(0,163,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+              <svg style="width:24px;height:24px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div style="color:#fff;font-weight:700;font-size:15px;">Guadalajara, Jal.</div>
+            <div style="color:#94A3B8;font-size:11px;margin-top:2px;">Sede Corporativa</div>
+          </div>
+        </div>
+        <div style="padding:20px;">
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 6px;">Oficina Matriz</h3>
+          <p style="font-size:14px;color:var(--ink-subtle);margin:0;">Jardines Japoneses #3538, Col. Lagos de Oriente · C.P. 44770</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="overflow:hidden;">
+        <div style="height:160px;background:linear-gradient(135deg,#1A2F50 0%,#253B5E 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div class="grid-overlay" style="position:absolute;inset:0;opacity:.1;"></div>
+          <div style="text-align:center;position:relative;">
+            <div style="width:48px;height:48px;background:rgba(0,163,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+              <svg style="width:24px;height:24px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div style="color:#fff;font-weight:700;font-size:15px;">El Fresno, Gdl.</div>
+            <div style="color:#94A3B8;font-size:11px;margin-top:2px;">Zona Industrial</div>
+          </div>
+        </div>
+        <div style="padding:20px;">
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 6px;">Sucursal El Fresno</h3>
+          <p style="font-size:14px;color:var(--ink-subtle);margin:0;">Calle Eucalipto #1926, Col. del Fresno · C.P. 44900</p>
+        </div>
+      </div>
+
+      <div class="card fade-in" style="overflow:hidden;">
+        <div style="height:160px;background:linear-gradient(135deg,#334155 0%,#475569 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div class="grid-overlay" style="position:absolute;inset:0;opacity:.1;"></div>
+          <div style="text-align:center;position:relative;">
+            <div style="width:48px;height:48px;background:rgba(0,163,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+              <svg style="width:24px;height:24px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div style="color:#fff;font-weight:700;font-size:15px;">Parral, Chih.</div>
+            <div style="color:#94A3B8;font-size:11px;margin-top:2px;">División Norte</div>
+          </div>
+        </div>
+        <div style="padding:20px;">
+          <h3 style="font-weight:700;color:var(--navy);margin:0 0 6px;">Sucursal Parral</h3>
+          <p style="font-size:14px;color:var(--ink-subtle);margin:0;">Calle Universidad #45, Col. Rubén Aguilar · C.P. 33826</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════ -->
+<footer style="background:var(--footer-bg);" aria-label="Pie de página">
+  <div style="max-width:1280px;margin:0 auto;padding:64px 24px 32px;">
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:48px;">
+
+      <!-- Col 1 -->
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <img src="Logo.jpeg" alt="Grupo AG de Occidente" style="height:44px;width:auto;border-radius:8px;object-fit:contain;" />
+          <div>
+            <div style="color:#fff;font-weight:700;font-size:12px;letter-spacing:.02em;">GRUPO AG DE OCCIDENTE</div>
+            <div style="color:#64748B;font-size:10px;letter-spacing:.12em;text-transform:uppercase;">Technology Trends · S.A. de C.V.</div>
+          </div>
+        </div>
+        <p style="color:#94A3B8;font-size:13px;line-height:1.75;margin:0 0 16px;">Empresa mexicana de ingeniería industrial especializada en automatización, mantenimiento eléctrico, HVAC y maniobras industriales desde 2002.</p>
+        <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#34D399;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px;">
+          <span class="pulse-dot" style="width:6px;height:6px;border-radius:50%;background:#10B981;display:inline-block;"></span>
+          Operaciones Activas
+        </span>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <h4 style="color:#fff;font-weight:700;font-size:13px;margin:0 0 16px;display:flex;align-items:center;gap:8px;">
+          <span style="display:inline-block;width:16px;height:2px;background:var(--cyan);flex-shrink:0;"></span>
+          Planta Guadalajara
+        </h4>
+        <p style="color:#64748B;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;">Centro Operativo y Fabricación Occidente</p>
+        <address style="font-style:normal;color:#94A3B8;font-size:13px;line-height:1.75;display:flex;flex-direction:column;gap:8px;">
+          <span>Jardines Japoneses #3538<br/>Col. Lagos de Oriente<br/>Guadalajara, Jal. · C.P. 44770</span>
+          <a href="tel:+523331590571" class="footer-link">
+            <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            +52 (33) 3159 0571
+          </a>
+          <a href="mailto:grupoagdeoccidente@hotmail.com" class="footer-link" style="word-break:break-all;">
+            <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            grupoagdeoccidente@hotmail.com
+          </a>
+        </address>
+      </div>
+
+      <!-- Col 3 -->
+      <div>
+        <h4 style="color:#fff;font-weight:700;font-size:13px;margin:0 0 16px;display:flex;align-items:center;gap:8px;">
+          <span style="display:inline-block;width:16px;height:2px;background:var(--cyan);flex-shrink:0;"></span>
+          Planta Parral
+        </h4>
+        <p style="color:#64748B;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;">División Minera y Automatización Norte</p>
+        <address style="font-style:normal;color:#94A3B8;font-size:13px;line-height:1.75;display:flex;flex-direction:column;gap:8px;">
+          <span>Calle Universidad #45<br/>Col. Rubén Aguilar<br/>Hidalgo del Parral, Chih. · C.P. 33826</span>
+          <a href="tel:+523331621424" class="footer-link">
+            <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            +52 (33) 3162 1424
+          </a>
+          <a href="mailto:facturacion@grupoagocc.com" class="footer-link">
+            <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            facturacion@grupoagocc.com
+          </a>
+        </address>
+      </div>
+
+      <!-- Col 4 -->
+      <div>
+        <h4 style="color:#fff;font-weight:700;font-size:13px;margin:0 0 16px;display:flex;align-items:center;gap:8px;">
+          <span style="display:inline-block;width:16px;height:2px;background:var(--cyan);flex-shrink:0;"></span>
+          Enlaces Técnicos
+        </h4>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="#inicio"         class="footer-link">
+            <svg style="width:12px;height:12px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            Inicio</a></li>
+          <li><a href="#nosotros"       class="footer-link">
+            <svg style="width:12px;height:12px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            Nosotros</a></li>
+          <li><a href="#especialidades" class="footer-link">
+            <svg style="width:12px;height:12px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            Especialidades</a></li>
+          <li><a href="#clientes"       class="footer-link">
+            <svg style="width:12px;height:12px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            Clientes</a></li>
+          <li><a href="#directorio"     class="footer-link">
+            <svg style="width:12px;height:12px;color:var(--cyan)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            Directorio</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;">
+      <p style="color:#475569;font-size:12px;margin:0;">© 2026 Grupo AG de Occidente S.A. de C.V. Todos los derechos reservados.</p>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;font-size:12px;color:#475569;">
+        <a href="#" style="color:#475569;text-decoration:none;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#475569'">Política de Calidad</a>
+        <span style="display:inline-block;width:1px;height:12px;background:#334155;"></span>
+        <a href="#" style="color:#475569;text-decoration:none;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#475569'">Aviso de Privacidad</a>
+        <span style="display:inline-block;width:1px;height:12px;background:#334155;"></span>
+        <a href="#directorio" style="color:#475569;text-decoration:none;" onmouseover="this.style.color='#94A3B8'" onmouseout="this.style.color='#475569'">Soporte Técnico</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════ -->
+<script>
+  // ── Mobile menu toggle ──
+  const burger = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (burger) {
+    burger.style.display = 'block';
+    burger.addEventListener('click', () => {
+      const isOpen = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = isOpen ? 'none' : 'block';
+      burger.setAttribute('aria-expanded', String(!isOpen));
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+    });
+  }
+
+  // ── Navbar shadow on scroll ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 10
+      ? '0 4px 24px rgba(15,30,54,.12)'
+      : '0 1px 0 #E2E8F0';
+  }, { passive: true });
+
+  // ── Responsive: collapse grids on mobile ──
+  function applyResponsive() {
+    const w = window.innerWidth;
+    const is2col = w < 768;
+    const is4col = w < 640;
+
+    // KPI grid
+    const kpiGrid = document.querySelector('#inicio > div:last-child > div > div');
+    if (kpiGrid) kpiGrid.style.gridTemplateColumns = is2col ? '1fr 1fr' : 'repeat(4,1fr)';
+
+    // Nosotros grid
+    const nosGrid = document.querySelector('#nosotros .lg\\:grid-cols-2');
+    if (nosGrid) nosGrid.style.gridTemplateColumns = is2col ? '1fr' : '1fr 1fr';
+
+    // Especialidades grid
+    const espGrid = document.querySelector('#especialidades > div > div:last-child');
+    if (espGrid) espGrid.style.gridTemplateColumns = is2col ? '1fr' : '1fr 1fr';
+
+    // Clientes grid
+    const cliGrid = document.querySelector('#clientes > div > div:first-of-type');
+    if (cliGrid) cliGrid.style.gridTemplateColumns = is4col ? '1fr' : is2col ? '1fr 1fr' : 'repeat(5,1fr)';
+
+    // Directorio grid
+    const dirGrid = document.querySelector('#directorio > div > div:last-child');
+    if (dirGrid) dirGrid.style.gridTemplateColumns = is2col ? '1fr' : '1fr 1fr';
+
+    // Ubicaciones grid
+    const ubGrid = document.querySelector('#ubicaciones > div > div:last-child');
+    if (ubGrid) ubGrid.style.gridTemplateColumns = is2col ? '1fr' : 'repeat(3,1fr)';
+
+    // Footer grid
+    const footGrid = document.querySelector('footer > div > div:first-child');
+    if (footGrid) footGrid.style.gridTemplateColumns = is2col ? '1fr 1fr' : 'repeat(4,1fr)';
+
+    // Burger visibility
+    if (burger) burger.style.display = w < 1024 ? 'block' : 'none';
+    const desktopNav = document.getElementById('desktop-nav');
+    if (desktopNav) desktopNav.style.display = w >= 1024 ? 'flex' : 'none';
+  }
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+
+  // ── Fade-in on scroll ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // ── Form submit ──
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="spin" style="width:16px;height:16px" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity=".25"></circle><path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" opacity=".75"></path></svg> Enviando...';
+    setTimeout(() => {
+      btn.innerHTML = '✓ Consulta enviada correctamente';
+      btn.style.background = '#059669';
+      btn.style.cursor = 'default';
+    }, 1800);
+  });
+
+  // ── Carouseles de Especialidades ──
+  document.querySelectorAll('.spec-card').forEach(card => {
+    const track = card.querySelector('.spec-carousel-track');
+    if (!track) return;
+    const imgs = track.querySelectorAll('img');
+    const dots = card.querySelectorAll('.sdot');
+    let cur = 0, timer;
+    function goTo(n) {
+      cur = ((n % imgs.length) + imgs.length) % imgs.length;
+      track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+      dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+    }
+    function start() { timer = setInterval(() => goTo(cur + 1), 3800); }
+    function stop()  { clearInterval(timer); }
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); stop(); start(); }));
+    const prevBtn = card.querySelector('.sc-prev');
+    const nextBtn = card.querySelector('.sc-next');
+    if (prevBtn) prevBtn.addEventListener('click', () => { goTo(cur - 1); stop(); start(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { goTo(cur + 1); stop(); start(); });
+    card.addEventListener('mouseenter', stop);
+    card.addEventListener('mouseleave', start);
+    start();
+  });
+</script>
+</body>
+</html>
