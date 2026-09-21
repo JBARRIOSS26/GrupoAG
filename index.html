@@ -91,8 +91,8 @@
     .spin { animation: spin .8s linear infinite; }
 
     /* ── Spec Carousel ── */
-    .spec-carousel-track { display:flex; height:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); will-change:transform; }
-    .spec-carousel-track img { flex-shrink:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+    .spec-carousel-track { display:flex; height:100%; transition:transform .65s cubic-bezier(.4,0,.2,1); will-change:transform; }
+    .spec-carousel-track img { flex-shrink:0; width:100%; height:100%; object-fit:contain; object-position:center; background:#0A1424; filter:brightness(1.05) contrast(1.08) saturate(1.15); }
     .sdots { position:absolute; bottom:20px; right:14px; display:flex; flex-direction:column; gap:6px; z-index:10; }
     .sdot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.35); cursor:pointer; transition:background .3s, transform .3s; border:none; padding:0; outline:none; }
     .sdot.active { background:var(--cyan); transform:scale(1.4); }
@@ -121,9 +121,9 @@
     <div style="display:flex; align-items:center; gap:6px; color:#94A3B8; font-size:12px;">
       <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
       Guardia &amp; Atención:&nbsp;
-      <a href="tel:+523331590571" style="color:#fff;font-weight:600;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#fff'">33 3159 0571</a>
+      <a href="tel:+523322625473" style="color:#fff;font-weight:600;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#fff'">33 2262 5473</a>
       &nbsp;/&nbsp;
-      <a href="tel:+523331621424" style="color:#fff;font-weight:600;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#fff'">33 3162 1424</a>
+      <a href="tel:+523331590571" style="color:#fff;font-weight:600;text-decoration:none;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='#fff'">33 3159 0571</a>
     </div>
   </div>
 </div>
@@ -158,7 +158,7 @@
 
       <!-- CTA + Burger -->
       <div style="display:flex;align-items:center;gap:12px;">
-        <a href="https://wa.me/523331590571?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Grupo%20AG%20de%20Occidente.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20industrial." id="cta-nav" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex" style="align-items:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;transition:background .3s,box-shadow .3s;" onmouseover="this.style.background='#128C7E';this.style.boxShadow='0 4px 16px rgba(37,211,102,.35)'" onmouseout="this.style.background='#25D366';this.style.boxShadow='none'">
+        <a href="https://wa.me/523322625473?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Grupo%20AG%20de%20Occidente.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20industrial." id="cta-nav" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex" style="align-items:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;transition:background .3s,box-shadow .3s;" onmouseover="this.style.background='#128C7E';this.style.boxShadow='0 4px 16px rgba(37,211,102,.35)'" onmouseout="this.style.background='#25D366';this.style.boxShadow='none'">
           <!-- WhatsApp icon -->
           <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.341.637 4.637 1.844 6.651L2.667 29.333l6.869-1.797A13.287 13.287 0 0016.003 29.333C23.363 29.333 29.333 23.363 29.333 16S23.363 2.667 16.003 2.667zm0 24.266a11.017 11.017 0 01-5.617-1.541l-.401-.239-4.076 1.068 1.088-3.967-.261-.407A10.999 10.999 0 015.001 16c0-6.065 4.937-11 11.002-11 6.063 0 10.997 4.935 10.997 11 0 6.063-4.934 10.933-10.997 10.933zm6.032-8.229c-.329-.165-1.948-.961-2.251-1.071-.303-.109-.523-.165-.743.165-.22.329-.853 1.071-1.046 1.291-.192.22-.385.247-.714.082-.329-.165-1.391-.513-2.649-1.636-.979-.875-1.639-1.955-1.831-2.284-.192-.329-.021-.507.145-.671.149-.148.329-.385.494-.578.164-.193.219-.33.329-.549.109-.22.055-.412-.027-.578-.083-.165-.744-1.791-1.019-2.452-.269-.645-.541-.557-.744-.567l-.633-.011c-.22 0-.577.082-.879.412-.303.329-1.155 1.127-1.155 2.749s1.183 3.189 1.347 3.409c.165.22 2.329 3.557 5.644 4.991.789.341 1.404.544 1.884.697.791.252 1.511.216 2.079.131.634-.094 1.948-.796 2.224-1.565.274-.769.274-1.428.192-1.565-.082-.137-.302-.22-.631-.385z"/></svg>
           WhatsApp
@@ -179,7 +179,7 @@
         <li><a href="#directorio"     class="nav-link" style="display:block;">Directorio</a></li>
         <li><a href="#ubicaciones"    class="nav-link" style="display:block;">Ubicaciones</a></li>
         <li style="margin-top:8px;">
-          <a href="https://wa.me/523331590571?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Grupo%20AG%20de%20Occidente.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20industrial." target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:8px;text-decoration:none;">
+          <a href="https://wa.me/523322625473?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Grupo%20AG%20de%20Occidente.%20Me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20industrial." target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:8px;text-decoration:none;">
             <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.341.637 4.637 1.844 6.651L2.667 29.333l6.869-1.797A13.287 13.287 0 0016.003 29.333C23.363 29.333 29.333 23.363 29.333 16S23.363 2.667 16.003 2.667zm0 24.266a11.017 11.017 0 01-5.617-1.541l-.401-.239-4.076 1.068 1.088-3.967-.261-.407A10.999 10.999 0 015.001 16c0-6.065 4.937-11 11.002-11 6.063 0 10.997 4.935 10.997 11 0 6.063-4.934 10.933-10.997 10.933zm6.032-8.229c-.329-.165-1.948-.961-2.251-1.071-.303-.109-.523-.165-.743.165-.22.329-.853 1.071-1.046 1.291-.192.22-.385.247-.714.082-.329-.165-1.391-.513-2.649-1.636-.979-.875-1.639-1.955-1.831-2.284-.192-.329-.021-.507.145-.671.149-.148.329-.385.494-.578.164-.193.219-.33.329-.549.109-.22.055-.412-.027-.578-.083-.165-.744-1.791-1.019-2.452-.269-.645-.541-.557-.744-.567l-.633-.011c-.22 0-.577.082-.879.412-.303.329-1.155 1.127-1.155 2.749s1.183 3.189 1.347 3.409c.165.22 2.329 3.557 5.644 4.991.789.341 1.404.544 1.884.697.791.252 1.511.216 2.079.131.634-.094 1.948-.796 2.224-1.565.274-.769.274-1.428.192-1.565-.082-.137-.302-.22-.631-.385z"/></svg>
             WhatsApp
           </a>
@@ -430,11 +430,11 @@
 
       <!-- Card 1: Eléctrico -->
       <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
-        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+        <div class="spec-carousel" style="position:relative;height:320px;overflow:hidden;background:#0A1424;">
           <div class="spec-carousel-track">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Tablero de control eléctrico" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="Técnico en subestación eléctrica" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" alt="Infraestructura de alta tensión" loading="lazy"/>
+            <img src="Imagenes/15.jpeg" alt="Tablero de distribución eléctrica industrial" loading="lazy"/>
+            <img src="Imagenes/13.jpeg" alt="Panel eléctrico con breakers y conexiones de potencia" loading="lazy"/>
+            <img src="Imagenes/14.jpeg" alt="Apriete de barras de distribución eléctrica" loading="lazy"/>
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
           <div style="position:absolute;top:16px;left:16px;z-index:6;">
@@ -473,11 +473,11 @@
 
       <!-- Card 2: HVAC -->
       <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
-        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+        <div class="spec-carousel" style="position:relative;height:320px;overflow:hidden;background:#0A1424;">
           <div class="spec-carousel-track">
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Sistema HVAC industrial" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=800&q=80" alt="Sistema de climatización industrial" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80" alt="Unidades de aire acondicionado industrial" loading="lazy"/>
+            <img src="Imagenes/6.jpeg" alt="Condensadores HVAC Liebert en azotea industrial" loading="lazy"/>
+            <img src="Imagenes/1.jpeg" alt="Unidad de precisión de climatización UMA" loading="lazy"/>
+            <img src="Imagenes/10.jpeg" alt="Equipo Vertiv Liebert DS de enfriamiento de precisión" loading="lazy"/>
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
           <div style="position:absolute;top:16px;left:16px;z-index:6;">
@@ -516,11 +516,11 @@
 
       <!-- Card 3: Automatización -->
       <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
-        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+        <div class="spec-carousel" style="position:relative;height:320px;overflow:hidden;background:#0A1424;">
           <div class="spec-carousel-track">
-            <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=800&q=80" alt="Línea de manufactura automatizada" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robots industriales PLC" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Tablero de control SCADA" loading="lazy"/>
+            <img src="Imagenes/21.jpeg" alt="Tablero de control con PLC Siemens LOGO" loading="lazy"/>
+            <img src="Imagenes/20.jpeg" alt="Panel de automatización con PLC Delta y relevadores" loading="lazy"/>
+            <img src="Imagenes/18.jpeg" alt="Panel de control PLC Allen-Bradley con cableado normado" loading="lazy"/>
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
           <div style="position:absolute;top:16px;left:16px;z-index:6;">
@@ -559,11 +559,11 @@
 
       <!-- Card 4: Maniobras -->
       <article class="spec-card fade-in" style="background:var(--surface);border-radius:16px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 3px rgba(15,30,54,.08);transition:box-shadow .3s,transform .3s;" onmouseover="this.style.boxShadow='0 8px 28px rgba(15,30,54,.14)';this.style.transform='translateY(-4px)';" onmouseout="this.style.boxShadow='0 1px 3px rgba(15,30,54,.08)';this.style.transform='translateY(0)';">
-        <div class="spec-carousel" style="position:relative;height:240px;overflow:hidden;">
+        <div class="spec-carousel" style="position:relative;height:320px;overflow:hidden;background:#0A1424;">
           <div class="spec-carousel-track">
-            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=800&q=80" alt="Construcción industrial pesada" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Maniobra con maquinaria pesada" loading="lazy"/>
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Montaje de estructura industrial" loading="lazy"/>
+            <img src="Imagenes/2.jpeg" alt="Maniobra de extracción de bomba en estación de pozo" loading="lazy"/>
+            <img src="Imagenes/4.jpeg" alt="Maquinaria industrial pesada con bandas transportadoras" loading="lazy"/>
+            <img src="Imagenes/3.jpeg" alt="Manejo de tubería pesada con herramienta de cadena" loading="lazy"/>
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,54,.85) 0%,rgba(15,30,54,.2) 50%,transparent 100%);pointer-events:none;z-index:4;"></div>
           <div style="position:absolute;top:16px;left:16px;z-index:6;">
@@ -752,13 +752,13 @@
 
         <!-- Phones -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <a href="tel:+523331590571" class="card" style="padding:16px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='#E2E8F0'">
+          <a href="tel:+523322625473" class="card" style="padding:16px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='#E2E8F0'">
             <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Línea 1</div>
-            <div style="font-weight:700;color:var(--navy);font-size:15px;">33 3159 0571</div>
+            <div style="font-weight:700;color:var(--navy);font-size:15px;">33 2262 5473</div>
           </a>
-          <a href="tel:+523331621424" class="card" style="padding:16px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='#E2E8F0'">
+          <a href="tel:+523331590571" class="card" style="padding:16px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='#E2E8F0'">
             <div style="font-size:10px;font-weight:700;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Línea 2</div>
-            <div style="font-weight:700;color:var(--navy);font-size:15px;">33 3162 1424</div>
+            <div style="font-weight:700;color:var(--navy);font-size:15px;">33 3159 0571</div>
           </a>
         </div>
 
@@ -921,9 +921,9 @@
         <p style="color:#64748B;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;">Centro Operativo y Fabricación Occidente</p>
         <address style="font-style:normal;color:#94A3B8;font-size:13px;line-height:1.75;display:flex;flex-direction:column;gap:8px;">
           <span>Jardines Japoneses #3538<br/>Col. Lagos de Oriente<br/>Guadalajara, Jal. · C.P. 44770</span>
-          <a href="tel:+523331590571" class="footer-link">
+          <a href="tel:+523322625473" class="footer-link">
             <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-            +52 (33) 3159 0571
+            +52 (33) 2262 5473
           </a>
           <a href="mailto:grupoagdeoccidente@hotmail.com" class="footer-link" style="word-break:break-all;">
             <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -941,9 +941,9 @@
         <p style="color:#64748B;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;">División Minera y Automatización Norte</p>
         <address style="font-style:normal;color:#94A3B8;font-size:13px;line-height:1.75;display:flex;flex-direction:column;gap:8px;">
           <span>Calle Universidad #45<br/>Col. Rubén Aguilar<br/>Hidalgo del Parral, Chih. · C.P. 33826</span>
-          <a href="tel:+523331621424" class="footer-link">
+          <a href="tel:+523331590571" class="footer-link">
             <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-            +52 (33) 3162 1424
+            +52 (33) 3159 0571
           </a>
           <a href="mailto:facturacion@grupoagocc.com" class="footer-link">
             <svg style="width:14px;height:14px;color:var(--cyan);flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -1099,7 +1099,7 @@
       track.style.transform = 'translateX(-' + (cur * 100) + '%)';
       dots.forEach((d, i) => d.classList.toggle('active', i === cur));
     }
-    function start() { timer = setInterval(() => goTo(cur + 1), 3800); }
+    function start() { timer = setInterval(() => goTo(cur + 1), 6000); }
     function stop()  { clearInterval(timer); }
     dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); stop(); start(); }));
     const prevBtn = card.querySelector('.sc-prev');
